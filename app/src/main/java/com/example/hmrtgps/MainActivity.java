@@ -1,5 +1,4 @@
 package com.example.hmrtgps;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -19,10 +18,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
@@ -87,7 +87,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    /* Aqui empieza la Clase Localizacion */
+
+
+        /* Aqui empieza la Clase Localizacion */
     public class Localizacion implements LocationListener {
         MainActivity mainActivity;
         public MainActivity getMainActivity() {
@@ -117,7 +119,10 @@ public class MainActivity extends AppCompatActivity {
                         { Manifest.permission.SEND_SMS,},1000);
             }else{
             };
-            final String men =String.format("Hola!, Las coordenadas son: Latitud=  %s, Longitud=  %s  HMRT GPS",sLatitud,sLongitud);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+           // Hallar la fecha
+            String fecha = dateFormat.format(new Date()).toString();
+            final String men =String.format(String.format("Hola!, Las coordenadas son: Latitud=  %%s, Longitud=  %%s, Fecha y hora: %s    ", fecha),sLatitud,sLongitud);
             Enviar.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     try {
